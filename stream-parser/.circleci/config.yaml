@@ -1,0 +1,33 @@
+version: 2.1
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout # check out the code in the project directory
+      - run: docker build -t mitct02/wrek_playlist:$CIRCLE_BRANCH  .
+
+  build-and-push:
+    machine: true
+    steps:
+      - checkout # check out the code in the project directory
+      - run: |
+         echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin
+      - run: docker build -t mitct02/wrek_playlist:$CIRCLE_TAG  .
+      - run: docker push mitct02/wrek_playlist:$CIRCLE_TAG
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          context: wrek_playlist
+
+  build-and-push:
+    jobs:
+      - build-and-push:
+          context: wrek_playlist
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/    # any tag starting with v

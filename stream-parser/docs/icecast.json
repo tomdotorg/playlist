@@ -1,0 +1,64 @@
+{
+  "icestats": {
+    "admin": "icemaster@localhost",
+    "host": "streaming.eng.wrek.org",
+    "location": "Earth",
+    "server_id": "Icecast 2.4.0",
+    "server_start": "Tue, 05 Nov 2019 22:24:05 -0500",
+    "server_start_iso8601": "2019-11-05T22:24:05-0500",
+    "source": [
+      {
+        "audio_info": "ice-samplerate=44100;ice-bitrate=128;ice-channels=2",
+        "bitrate": 128,
+        "genre": "Various",
+        "ice-bitrate": 128,
+        "ice-channels": 2,
+        "ice-samplerate": 44100,
+        "listener_peak": 5,
+        "listeners": 4,
+        "listenurl": "http://streaming.eng.wrek.org:8000/hd2/128kb.mp3",
+        "server_description": "Quality, diverse programming from the students of Georgia Tech",
+        "server_name": "WREK Atlanta HD-2",
+        "server_type": "audio/mpeg",
+        "server_url": "http://www.wrek.org",
+        "stream_start": "Sun, 24 Nov 2019 12:19:48 -0500",
+        "stream_start_iso8601": "2019-11-24T12:19:48-0500",
+        "title": "Vincent Gallo - Sunny And Cloudy",
+        ,
+        {
+          "audio_info": "bitrate=128;samplerate=44100;channels=2",
+          "channels": 2,
+          "genre": "various",
+          "listener_peak": 17,
+          "listeners": 14,
+          "listenurl": "http://streaming.eng.wrek.org:8000/main/128kb.mp3",
+          "samplerate": 44100,
+          "server_description": "Quality, diverse programming from the students of Georgia Tech.",
+          "server_name": "WREK Atlanta 91.1fm - Georgia Tech Student Radio, 128kbit",
+          "server_type": "audio/mpeg",
+          "server_url": "http://www.wrek.org/",
+          "stream_start": "Wed, 06 Nov 2019 21:44:01 -0500",
+          "stream_start_iso8601": "2019-11-06T21:44:01-0500",
+          "title": "Stevens/Rutherford/Parker/Guy - 1,3,2",
+          "dummy": null
+        },
+        {
+          "audio_info": "bitrate=24;samplerate=22050;channels=1",
+          "channels": 1,
+          "genre": "various",
+          "listener_peak": 5,
+          "listeners": 3,
+          "listenurl": "http://streaming.eng.wrek.org:8000/main/24kb.mp3",
+          "samplerate": 22050,
+          "server_description": "Quality, diverse programming from the students of Georgia Tech.",
+          "server_name": "WREK Atlanta 91.1fm - Georgia Tech Student Radio, 24kbit",
+          "server_type": "audio/mpeg",
+          "server_url": "http://www.wrek.org/",
+          "stream_start": "Wed, 06 Nov 2019 21:44:01 -0500",
+          "stream_start_iso8601": "2019-11-06T21:44:01-0500",
+          "title": "Stevens/Rutherford/Parker/Guy - 1,3,2",
+          "dummy": null
+        }
+      ]
+    }
+  }

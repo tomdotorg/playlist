@@ -1,0 +1,65 @@
+'use strict'
+
+const nconf = require('nconf')
+const express = require('express')
+const playlistController = require('./playlists');
+//const bodyParser = require('body-parser')
+let moment = require('moment');
+
+nconf.argv().env().file('keys.json');
+
+const app = express();
+//app.use(bodyParser.json());
+
+function makeTableHTML(myArray) {
+  var result = "<table border=1>";
+  result += "<tr><td><b>Date</b></td>";
+  result += "<td><b>Artist</b></td>";
+  result += "<td><b>Song</b></td></tr>";
+
+  for(var i=0; i<myArray.length; i++) {
+      result += "<tr>";
+      result += `<td>${moment(myArray[i].date).format("ddd, MMM D h:mm a")}</td>`;
+      result += `<td>${myArray[i].artist}</td>`;
+      result += `<td>${myArray[i].title}</td>`;
+      result += "</tr>";
+  }
+  result += "</table>";
+
+  return result;
+}
+
+app.get('/api/playlist/:station/:limit', (req, res) => {
+  console.log(req.params.station, req.params.limit);
+  playlistController.getPlaylistByStation(req.params.station, req.params.limit)
+  .then((result) => {
+    if (result) {
+      if (req.query.format == 'html') {
+        result = makeTableHTML(result);
+      }
+      res
+      .status(200)
+      .send(result)
+      .end();
+    } else {
+      res
+      .status(404)
+      .send(`${req.params.station} not found`)
+      .end();
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500)
+    .send(err)
+    .end();
+  })
+});
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+  console.log('Press Ctrl+C to quit.');
+});
+
+module.exports = app;

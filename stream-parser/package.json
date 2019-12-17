@@ -1,0 +1,17 @@
+{
+  "name": "wrek",
+  "version": "1.0.0",
+  "description": "http://icecast.org/docs/icecast-2.4.1/server-stats.html",
+  "main": "wrek_playlist.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "icecast-parser": "^3.2.1",
+    "mongodb": "^3.4.0",
+    "nconf": "^0.10.0"
+  }
+}
