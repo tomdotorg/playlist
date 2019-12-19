@@ -31,7 +31,7 @@ function makeTableHTML(myArray) {
 
 app.get('/api/playlist/:station/:limit', (req, res) => {
   console.log(req.params.station, req.params.limit);
-  playlistController.getPlaylistByStation(req.params.station, req.params.limit)
+  playlistController.getPlaylistByStation(req.params.station, moment(0), req.params.limit)
   .then((result) => {
     if (result) {
       if (req.query.format == 'html') {
