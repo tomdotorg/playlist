@@ -12,17 +12,29 @@ const DB = nconf.get('mongoDatabase');
 
 const URL = encodeURI(`mongodb+srv://${USER}:${PASS}@${HOST}/${DB}`)
 
-async function getPlaylistByStation(station, limit) {
+async function getPlaylistByStation(station, since, limit) {
+  console.log('getPlaylistByStation', station, since.toString(), limit);
   const client = new MongoClient(URL, { useUnifiedTopology: true });
   limit = parseInt(limit);
   try {
     console.log(`querying ${station} - limit is ${limit}`)
     let db = await client.connect()
     const col = db.db(DB).collection('wrek-hd2');
-    let result = await col.aggregate([
+    let result = await col.aggregate(
+      [
         {
           '$match': {
-            'station': station
+            '$and': [
+              {
+                '$expr': {
+                  '$gte': [
+                    '$date', since.toDate()
+                  ]
+                }
+              }, {
+                'station': station
+              }
+            ]
           }
         }, {
           '$sort': {
@@ -31,8 +43,9 @@ async function getPlaylistByStation(station, limit) {
         }, {
           '$limit': limit
         }
-    ]    ).toArray();
-    console.log(result);
+      ]
+    ).toArray();
+//    console.log(result);
     return result;
   } catch (e) {
     console.error(`Error occurred while querying, ${e}`)
