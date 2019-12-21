@@ -4,9 +4,10 @@ const nconf = require('nconf')
 const express = require('express')
 const playlistController = require('./playlists');
 //const bodyParser = require('body-parser')
-let moment = require('moment');
+let moment = require('moment-timezone');
 
 nconf.argv().env().file('keys.json');
+const TZ = nconf.get("tz") || "America/New_York";
 
 const app = express();
 //app.use(bodyParser.json());
@@ -18,8 +19,9 @@ function makeTableHTML(myArray) {
   result += "<td><b>Song</b></td></tr>";
 
   for(var i=0; i<myArray.length; i++) {
-      result += "<tr>";
-      result += `<td>${moment(myArray[i].date).format("ddd, MMM D h:mm a")}</td>`;
+    let offset = moment.tz.zone(TZ).utcOffset(moment(myArray[i].date)) * -1;
+    result += "<tr>";
+      result += `<td>${moment(myArray[i].date).utcOffset(offset).format("ddd, MMM D h:mm a")}</td>`;
       result += `<td>${myArray[i].artist}</td>`;
       result += `<td>${myArray[i].title}</td>`;
       result += "</tr>";
