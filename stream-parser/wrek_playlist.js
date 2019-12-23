@@ -106,7 +106,7 @@ retrieveLastMetadata().then((result) => {
         });
       })
       .catch((err) => {
-        console.error(e);
+        console.error(err);
       })
   }
     , 5000);
