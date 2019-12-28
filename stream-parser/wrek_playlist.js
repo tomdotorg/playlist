@@ -26,9 +26,12 @@ function getExceptions(filename, callback) {
   });
 };
 
-function isException(title) {
-  console.log('isException():', title, EXCEPTIONS.includes(title));
-  return EXCEPTIONS.includes(title);
+function isException(artist) {
+  if (EXCEPTIONS.includes(artist)) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 function getStreamMetadata(url, callback) {
@@ -104,7 +107,8 @@ setInterval(function () {
         if (playing && // we can see what is playing from the stream
             lastSong == undefined || // it is the first record for this station
             ((playing['title'] != lastSong['title']) && // the song is different
-            (playing['station'] == lastSong['station']))) { // but the station is the same
+            (playing['station'] == lastSong['station']) &&
+            (!isException(playing['artist'])))) { // but the station is the same
           persistMetadata(playing)
             .then((result) => {
               console.log('saved', result.insertedCount, 'record(s)', playing)
