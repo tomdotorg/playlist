@@ -65,12 +65,23 @@ async function persistMetadata(metadata) {
   try {
     const db = await client.connect();
     const col = db.db(DB).collection(COLL);
-    console.log('calling insertOne()');
-    const dbResult = await col.insertOne(metadata);
-    return dbResult;
+    // good place to put in a check for dups
+    // read the last record for this station
+    // if it is the same as this one, do nothing, otherwise store it
+    let dbResult = await retrieveLastMetadata();
+    console.log('last result: ', dbResult);
+    console.log('this result: ', metadata);
+    if (!dbResult  ||
+              ((dbResult['title'] && (dbResult['title'] != metadata['title'])) ||
+              (dbResult['artist'] && (dbResult['artist'] != metadata['artist'])))) {
+      console.log('calling insertOne()');
+      dbResult = await col.insertOne(metadata);
+      return dbResult;
+    } else {
+      console.error('problem inserting', metadata);
+    }
   } catch (e) {
     console.error(`Error occurred while saving metadata, ${e}`)
-    throw (e);
   } finally {
     client.close()
   }

@@ -1,3 +1,3 @@
-VERSION=1.0.2
+VERSION=1.0.3
 docker build -t docker.io/mitct02/wrek_playlist:$VERSION .
 docker push docker.io/mitct02/wrek_playlist:$VERSION
