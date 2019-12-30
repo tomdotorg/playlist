@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "debug": "^4.1.1",
     "icecast-parser": "^3.2.1",
     "mongodb": "^3.4.0",
     "nconf": "^0.10.0"

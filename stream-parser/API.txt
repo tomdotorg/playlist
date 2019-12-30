@@ -1,0 +1,34 @@
+use cases
+
+view playlist by station
+  since date
+  date range
+  next/previous
+  cursor size
+  last x entries
+
+search playlist
+  by artist and date range
+  by song and date range
+
+look up song details
+add to spotify playlist
+
+endpoints
+
+/api/v1/listing/stream/:station?start=dkjfgfkd&end=sdkfhsldf&max=200&format={json|html}
+/api/v1/listing/search/:station?start=sldfh&end
+
+resources
+station
+
+
+query params
+
+max records (500)
+page (1)
+begin date (24 hours ago)
+end date (now)
+artist match
+title match
+order (desc)
