@@ -18,10 +18,9 @@ function makeTableHTML(myArray) {
   result += "<td><b>Artist</b></td>";
   result += "<td><b>Song</b></td></tr>";
 
-  for(var i=0; i<myArray.length; i++) {
-    let offset = moment.tz.zone(TZ).utcOffset(moment(myArray[i].date)) * -1;
-    result += "<tr>";
-      result += `<td>${moment(myArray[i].date).utcOffset(offset).format("ddd, MMM D h:mm a")}</td>`;
+  for(var i=0; i < myArray.length; i++) {
+      result += "<tr>";
+      result += `<td>${moment(myArray[i].date).format("ddd, MMM D h:mm a")}</td>`;
       result += `<td>${myArray[i].artist}</td>`;
       result += `<td>${myArray[i].title}</td>`;
       result += "</tr>";
