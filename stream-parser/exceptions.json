@@ -1,5 +1,6 @@
 { 
-  "exceptions": [ "Quality Diverse Programming",
+  "exceptions": [ 
+    "Quality Diverse Programming",
     "Home of the True Yellow Jackets Sports Fan",
     "Georgia Tech Student Radio",
     "We Give All the Birds a Chance",
@@ -7,6 +8,7 @@
     "Weekend Cornucopia",
     "Rock, Rhythm, and Roll",
     "Just Jazz",
-    "The Classics"
+    "The Classics",
+    "Overnight Alternatives"
   ]
 }
