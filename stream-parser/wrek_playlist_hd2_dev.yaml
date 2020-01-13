@@ -19,7 +19,7 @@ spec:
         env: dev
     spec:
       containers:
-      - image: docker.io/mitct02/wrek_playlist:1.0.5
+      - image: docker.io/mitct02/wrek_playlist:1.0.6
         name: wrek-hd2-dev-streamparser
         imagePullPolicy: "Always"
         resources:
