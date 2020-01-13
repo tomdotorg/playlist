@@ -53,7 +53,9 @@ function getStreamMetadata(url, callback) {
       artist = metadata.StreamTitle.split(' - ')[0];
       title = metadata.StreamTitle.split(' - ')[1];
     }
-    callback({ 'date': new Date(), 'station': STATION, 'artist': artist, 'title': title });
+    if (artist != null || title != null) {
+      callback({ 'date': new Date(), 'station': STATION, 'artist': artist, 'title': title });
+    }
   })
   .on('error', function(error) {
     console.error(error);
@@ -71,7 +73,7 @@ async function persistMetadata(metadata) {
     let dbResult = await retrieveLastMetadata();
     console.log('last result: ', dbResult);
     console.log('this result: ', metadata);
-    if (!dbResult  ||
+    if ((!dbResult && (metadata['title'] != null || metadata['artist'] != null))  ||
               ((dbResult['title'] && (dbResult['title'] != metadata['title'])) ||
               (dbResult['artist'] && (dbResult['artist'] != metadata['artist'])))) {
       console.log('calling insertOne()');
@@ -122,8 +124,10 @@ setInterval(function () {
             (!isException(playing['artist'])))) { // but the station is the same
           persistMetadata(playing)
             .then((result) => {
-              console.log('saved', result.insertedCount, 'record(s)', playing)
-              lastSong = playing;
+              if (result) {
+                console.log('saved', result.insertedCount, 'record(s)', playing)
+                lastSong = playing;
+              }
             })
             .catch((err) => {
               console.log(err);
