@@ -1,0 +1,43 @@
+apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: wrek-hd2-dev-streamparser-deployment
+  labels:
+    app: wrek-hd2-dev-streamparser
+    station: hd2
+    env: dev
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: wrek-hd2-dev-streamparser
+  template:
+    metadata:
+      labels:
+        app: wrek-hd2-dev-streamparser
+        station: hd2
+        env: dev
+    spec:
+      containers:
+      - image: docker.io/mitct02/wrek_playlist:1.0.6
+        name: wrek-hd2-dev-streamparser
+        imagePullPolicy: "Always"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "1m"
+          limits:
+            memory: "256Mi"
+            cpu: "100m"
+        env:
+        - name: radioUrl
+          value: "https://streaming.eng.wrek.org/hd2/128kb.mp3"
+        - name: "station"
+          value: "wrek-hd2-dev"
+        - name: "NODE_ENV"
+          value: "dev"
+        - name: "DEBUG"
+          value: "*"
+
+      imagePullSecrets:
+      - name:  dockerhub-secret
